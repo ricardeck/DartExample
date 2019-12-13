@@ -12,10 +12,21 @@ class AchadosController {
 
 
   }
-    static void addItem() async {
+  static void addItem() async {
     ItemList lista = await getItensList();
     Item item = newItem();
     lista.addOccurence(item);
+    writeOnJson(lista);
+  }
+
+  static void deleteItem() async {
+    int id;
+    ItemList lista = await getItensList();
+    stdout.write("\n\nDigite o Id do item que deseja deletar\n");
+    id = int.parse(stdin.readLineSync());
+    lista.removeItem(id)
+        ? stdout.write("\nItem Removido com Sucesso\n")
+        : stdout.write("\nItem não removido id/arquivo não encontrado\n");
     writeOnJson(lista);
   }
 

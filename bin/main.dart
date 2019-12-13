@@ -16,10 +16,15 @@ main(List<String> arguments) async {
         break;
 
       case '2':
-        AchadosController.addItem();
+        await AchadosController.addItem();
         break;
 
+
       case '3':
+        await AchadosController.deleteItem();
+        break;
+
+      case '0':
         exit = 1;
         break;
 
