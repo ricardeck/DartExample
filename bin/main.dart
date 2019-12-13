@@ -23,6 +23,10 @@ main(List<String> arguments) async {
       case '3':
         await AchadosController.deleteItem();
         break;
+      
+      case '4':
+        await AchadosController.editarItem();
+        break;
 
       case '0':
         exit = 1;
@@ -40,5 +44,7 @@ void menu() {
   stdout.write("\n\nSelecione a opção desejada:\n");
   stdout.write("\n1 - Mostrar todos os itens encontrados\n");
   stdout.write("\n2 - Adicionar novo item\n");
-  stdout.write("\n3 - Exit the program\n");
+  stdout.write("\n3 - Remover um item\n");
+  stdout.write("\n4 - Editar um item\n");
+  stdout.write("\n0 - Exit the program\n");
 }

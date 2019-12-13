@@ -19,6 +19,26 @@ class AchadosController {
     writeOnJson(lista);
   }
 
+    static void addItemEd(int id) async {
+    ItemList lista = await getItensList();
+    Item item = newItemById(id);
+    lista.addOccurence(item);
+    writeOnJson(lista);
+  }
+
+  static void editarItem() async {
+    ItemList lista = await getItensList();
+    stdout.write("\n\nDigite o Id do item que deseja editar\n");
+    int id = int.parse(stdin.readLineSync());
+    if(lista.searchItemById(id)){
+      lista.removeItem(id);
+      writeOnJson(lista);
+      await addItemEd(id);
+    }else{
+      stdout.write("\nNão existe o id informado\n");
+    }
+  }
+
   static void deleteItem() async {
     int id;
     ItemList lista = await getItensList();
@@ -58,7 +78,23 @@ class AchadosController {
     return new Item(id, dataRecebido, dataEntregue, descricao, );
   }
 
-    static void writeOnJson(ItemList lista) {
+  static Item newItemById(int id) {
+    String dataRecebido, dataEntregue, descricao;
+
+    stdout.write("\n\Edite os dados do item perdido:\n");
+
+    stdout.write("\nData do recebimento\n");
+    dataRecebido = stdin.readLineSync();
+
+    stdout.write("\nDescricao do item\n");
+    descricao = stdin.readLineSync();
+
+    stdout.write("\nData que foi entregue ao dono:\n");
+    dataEntregue = stdin.readLineSync();
+    return new Item(id, dataRecebido, dataEntregue, descricao, );
+  }
+
+  static void writeOnJson(ItemList lista) {
     var str = json.encode(lista.itens);
     File file = new File("../arquivos/itens_list.json");
     file.writeAsStringSync(str);
